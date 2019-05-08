@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared.Models
 {
-    class QuickInfo
+    public class QuickInfo
     {
         public float AvgTemperature { get; set; }
         public float AvgHumidity { get; set; }

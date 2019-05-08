@@ -7,5 +7,6 @@ namespace Shared.Utilities
     public static class Constants
     {
         public static readonly string boilerStatusGetURI = "localhost";
+        public static readonly string defaultUserName = "default";
     }
 }
