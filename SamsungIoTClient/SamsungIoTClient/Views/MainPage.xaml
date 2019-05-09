@@ -26,6 +26,17 @@
                 <views:AboutPage />
             </x:Arguments>
         </NavigationPage>
+
+        <NavigationPage Title="Сведения">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_about.png"/>
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:BoilerStatusListViewPage1 />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
     
 </TabbedPage>

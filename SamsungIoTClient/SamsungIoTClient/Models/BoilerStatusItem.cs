@@ -4,9 +4,10 @@ using System.Text;
 
 namespace SamsungIoTClient.Models
 {
-    class BoilerStatusItem
+    public class BoilerStatusItem
     {
         public string Name { get; set; }
         public string Value { get; set; }
+        public string Unit { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SamsungIoTWebAPI.Models;
 using Shared.Models;
+using Shared.Utilities;
 
 namespace SamsungIoTWebAPI.Controllers
 {
@@ -52,6 +53,8 @@ namespace SamsungIoTWebAPI.Controllers
             }
 
             _context.Entry(boilerStatus).State = EntityState.Modified;
+            boilerStatus.UpdateTime = DateTime.Now;
+            boilerStatus.UserId = Constants.defaultUserName;
 
             try
             {
@@ -76,6 +79,9 @@ namespace SamsungIoTWebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<BoilerStatus>> PostBoilerStatus(BoilerStatus boilerStatus)
         {
+            boilerStatus.UpdateTime = DateTime.Now;
+            boilerStatus.UserId = Constants.defaultUserName;
+
             _context.BoilerStatus.Add(boilerStatus);
             await _context.SaveChangesAsync();
 

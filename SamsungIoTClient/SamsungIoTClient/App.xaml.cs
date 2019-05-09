@@ -14,6 +14,7 @@ namespace SamsungIoTClient
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<WebAPIDataStore>();
             MainPage = new MainPage();
         }
 

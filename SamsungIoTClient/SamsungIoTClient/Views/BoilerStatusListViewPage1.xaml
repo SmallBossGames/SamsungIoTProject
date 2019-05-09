@@ -3,20 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SamsungIoTClient.Models"
+             xmlns:localCell="clr-namespace:SamsungIoTClient.Views"
              mc:Ignorable="d"
-             x:Class="SamsungIoTClient.Views.BoilerStatusListViewPage1">
+             x:Class="SamsungIoTClient.Views.BoilerStatusListViewPage1"
+             Title="BoilerStatus"
+             >
     
   <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-            
+            CachingStrategy="RecycleElement"
+            Margin="20">
+
+        <ListView.ItemsSource>
+            <x:Array Type="{x:Type local:BoilerStatusItem}">
+                <local:BoilerStatusItem Name="Температура" Value="1488 °С" Unit="°С"/>
+                <local:BoilerStatusItem Name="Влажность воздуха" Value="50 %" Unit="ewfw"/>
+                <local:BoilerStatusItem Name="Утечка газа" Value="нет" Unit="ewfw"/>
+                <local:BoilerStatusItem Name="Температура теплоносителя" Value="60 °С" Unit="ewfw"/>
+            </x:Array>
+        </ListView.ItemsSource>     
     <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.7*" />
+                            <ColumnDefinition Width="0.3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Grid.Column="1" Text="{Binding Value}" FontSize="Medium" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
     
     <!--Custom View Cells-->
     <!--
