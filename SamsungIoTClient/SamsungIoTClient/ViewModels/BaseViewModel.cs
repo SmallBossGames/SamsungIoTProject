@@ -13,6 +13,7 @@ namespace SamsungIoTClient.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IWebAPIDataStore WebAPIDataStore => DependencyService.Get<IWebAPIDataStore>() ?? new WebAPIDataStore();
 
         bool isBusy = false;
         public bool IsBusy

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SamsungIoTClient.Views.RoomsStatusListPage"
+             xmlns:models="clr-namespace:SamsungIoTClient.Models"
+             Title="{Binding Title}">
+    
+    <StackLayout>
+        <ListView x:Name="MyListView"
+                  ItemsSource="{Binding Items}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadItemsCommand}"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="true"
+                  ItemTapped="Handle_ItemTapped"
+                  Margin="10"
+                  SeparatorColor="LightGray"
+            >
+            
+            <!--<ListView.ItemsSource>
+            <x:Array Type="{x:Type models:RoomStatusItem}">
+                <models:RoomStatusItem Temperature="100°C" Humidity="50%" RoomName="Комната 1"/>
+                <models:RoomStatusItem Temperature="30°C" Humidity="53%" RoomName="Комната 2"/>
+            </x:Array>
+        </ListView.ItemsSource>-->
+        
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Text="{Binding RoomName}" Grid.RowSpan="1" Grid.Row="0" FontSize="Large" FontAttributes="Bold"/>
+                            <Label Grid.Column="0" Grid.Row="1" Text="Температура" FontAttributes="Bold" FontSize="Medium"/>
+                            <Label Grid.Column="0" Grid.Row="2" Text="{Binding Temperature}" FontSize="Medium"/>
+                            <Label Grid.Column="1" Grid.Row="1" Text="Влажность" FontAttributes="Bold" FontSize="Medium"/>
+                            <Label Grid.Column="1" Grid.Row="2" Text="{Binding Humidity}" FontSize="Medium"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -9,8 +9,8 @@
              x:Class="SamsungIoTClient.Views.BoilerStatusListViewPage1"
              Title="BoilerStatus"
              >
-    
-  <ListView x:Name="MyListView"
+
+    <ListView x:Name="MyListView"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
             Margin="20">
@@ -22,8 +22,8 @@
                 <local:BoilerStatusItem Name="Утечка газа" Value="нет" Unit="ewfw"/>
                 <local:BoilerStatusItem Name="Температура теплоносителя" Value="60 °С" Unit="ewfw"/>
             </x:Array>
-        </ListView.ItemsSource>     
-    <!--Built in Cells-->
+        </ListView.ItemsSource>
+        <!--Built in Cells-->
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -38,9 +38,9 @@
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
+
+        <!--Custom View Cells-->
+        <!--
     <ListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
@@ -54,5 +54,5 @@
       </DataTemplate>
     </ListView.ItemTemplate>
     -->
-  </ListView>
+    </ListView>
 </ContentPage>

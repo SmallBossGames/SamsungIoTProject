@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 namespace SamsungIoTClient.Services
 {
-    class WebAPIDataStore
+    public class WebAPIDataStore : IWebAPIDataStore
     {
-        HttpClient _client;
+        private readonly HttpClient _client;
 
         public WebAPIDataStore()
         {
@@ -40,7 +40,7 @@ namespace SamsungIoTClient.Services
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<RoomStatus[]>(content);
             }
-            return null;
+            return new RoomStatus[0];
         }
 
         public async Task<RoomStatus> GetRoomStatus(int number)
