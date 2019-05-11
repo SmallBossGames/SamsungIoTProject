@@ -18,15 +18,28 @@ namespace SamsungIoTWebAPI.Services
 
         public async Task<QuickInfo> GetQuickInfo(string userId)
         {
-            var avgHumidity = await
-                (from roomsInfo in GetRoomLastStatusQuery(userId)
-                 select roomsInfo.AirHumidity).AverageAsync();
+            var query = from roomInfo in _context.RoomStatus
+                        where roomInfo.UserId == userId
+                        group roomInfo by roomInfo.RoomNumber into roomGroupInfo
+                        let maxDate = roomGroupInfo.Max(x => x.UpdateTime)
+                        from roomInfo in roomGroupInfo
+                        where roomGroupInfo.Max(x => x.UpdateTime) == roomInfo.UpdateTime
+                        select roomInfo;
 
-            var avgTemperature = await
-                (from roomsInfo in GetRoomLastStatusQuery(userId)
-                 select roomsInfo.Temperature).AverageAsync();
+            var avgHumidity = await query.AverageAsync(x => x.AirHumidity);
 
-            var boilerLastStatus = await GetLastBoilerStatus(userId);
+            var avgTemperature = await query.AverageAsync(x => x.Temperature);
+
+            var boilerLastStatus = await
+                (from boilerInfo in _context.BoilerStatus
+                 where boilerInfo.UserId == userId
+                 orderby boilerInfo.UpdateTime
+                 select boilerInfo).LastOrDefaultAsync();
+
+            if(boilerLastStatus == null)
+            {
+                return null;
+            }
 
             return new QuickInfo
             {

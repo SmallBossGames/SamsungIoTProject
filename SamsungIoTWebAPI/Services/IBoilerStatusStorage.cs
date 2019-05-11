@@ -9,5 +9,6 @@ namespace SamsungIoTWebAPI.Services
         Task<BoilerStatus> GetLastBoilerStatus(string userId);
         Task<List<RoomStatus>> GetLastRoomStatus(string userId);
         Task<RoomStatus> GetLastRoomStatus(string userId, int roomNumber);
+        Task<QuickInfo> GetQuickInfo(string userId);
     }
 }
