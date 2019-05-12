@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using SamsungIoTClient.Models;
-
+using SamsungIoTClient.ViewModels;
 
 namespace SamsungIoTClient.Views
 {
@@ -16,12 +16,12 @@ namespace SamsungIoTClient.Views
     public partial class BoilerStatusListViewPage1 : ContentPage
     {
 
-        public ObservableCollection<BoilerStatusItem> Items { get; set; }
+        private readonly QuickInfoViewModel viewModel;
         public BoilerStatusListViewPage1()
         {
             InitializeComponent();
 
-            //MyListView.ItemsSource = Items;
+            BindingContext = viewModel = new QuickInfoViewModel();
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -33,6 +33,14 @@ namespace SamsungIoTClient.Views
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

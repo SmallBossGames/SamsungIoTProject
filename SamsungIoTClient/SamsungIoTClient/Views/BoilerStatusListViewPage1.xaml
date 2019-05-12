@@ -7,52 +7,45 @@
              xmlns:localCell="clr-namespace:SamsungIoTClient.Views"
              mc:Ignorable="d"
              x:Class="SamsungIoTClient.Views.BoilerStatusListViewPage1"
-             Title="BoilerStatus"
+             Title="{Binding Title}"
              >
+    <StackLayout>
+        <ListView x:Name="MyListView"
+                  ItemsSource="{Binding Items}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadItemsCommand}"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="true"
+                  ItemTapped="Handle_ItemTapped"
+                  Margin="20"
+                  SeparatorColor="LightGray">
 
-    <ListView x:Name="MyListView"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement"
-            Margin="20">
-
-        <ListView.ItemsSource>
-            <x:Array Type="{x:Type local:BoilerStatusItem}">
-                <local:BoilerStatusItem Name="Температура" Value="1488 °С" Unit="°С"/>
-                <local:BoilerStatusItem Name="Влажность воздуха" Value="50 %" Unit="ewfw"/>
-                <local:BoilerStatusItem Name="Утечка газа" Value="нет" Unit="ewfw"/>
-                <local:BoilerStatusItem Name="Температура теплоносителя" Value="60 °С" Unit="ewfw"/>
+            <!--<ListView.ItemsSource>
+            <x:Array Type="{x:Type local:QuickInfoItem}">
+                    <local:QuickInfoItem Name="Температура" Value="1488 °С" Unit="°С"/>
+                    <local:QuickInfoItem Name="Влажность воздуха" Value="50 %" Unit="ewfw"/>
+                    <local:QuickInfoItem Name="Утечка газа" Value="нет" Unit="ewfw"/>
+                    <local:QuickInfoItem Name="Температура теплоносителя" Value="60 °С" Unit="ewfw"/>
             </x:Array>
-        </ListView.ItemsSource>
-        <!--Built in Cells-->
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*" />
-                            <ColumnDefinition Width="0.3*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"/>
-                        <Label Grid.Column="1" Text="{Binding Value}" FontSize="Medium" />
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+        </ListView.ItemsSource>-->
 
-        <!--Custom View Cells-->
-        <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-    </ListView>
+            <!--Built in Cells-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" FontAttributes="None" TextColor="Black" FontSize="Large"/>
+                            <Label Grid.Column="0" Grid.Row="1" Text="{Binding Value}" FontSize="Medium" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

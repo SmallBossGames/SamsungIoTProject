@@ -15,7 +15,7 @@
                   CachingStrategy="RecycleElement"
                   IsPullToRefreshEnabled="true"
                   ItemTapped="Handle_ItemTapped"
-                  Margin="10"
+                  Margin="20"
                   SeparatorColor="LightGray"
             >
             

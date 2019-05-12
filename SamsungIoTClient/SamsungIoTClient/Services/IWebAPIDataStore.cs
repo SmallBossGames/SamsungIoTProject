@@ -8,5 +8,6 @@ namespace SamsungIoTClient.Services
         Task<BoilerStatus> GetBoilerCurrentStatusAsync();
         Task<RoomStatus[]> GetRoomStatus();
         Task<RoomStatus> GetRoomStatus(int number);
+        Task<QuickInfo> GetQuickInfoAsync();
     }
 }

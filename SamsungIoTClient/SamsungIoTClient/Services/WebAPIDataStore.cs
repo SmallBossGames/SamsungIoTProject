@@ -19,6 +19,19 @@ namespace SamsungIoTClient.Services
             _client = new HttpClient();
         }
 
+        public async Task<QuickInfo> GetQuickInfoAsync()
+        {
+            var uri = new Uri(Constants.quickInfoURL);
+            var response = await _client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<QuickInfo>(content);
+            }
+            return null;
+        }
+
         public async Task<BoilerStatus> GetBoilerCurrentStatusAsync()
         {
             var uri = new Uri(Constants.currentBoilerStatusURL);

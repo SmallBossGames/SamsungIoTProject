@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SamsungIoTClient.Models
 {
-    public class BoilerStatusItem
+    public class QuickInfoItem
     {
         public string Name { get; set; }
         public string Value { get; set; }
